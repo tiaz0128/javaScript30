@@ -71,6 +71,15 @@
     audio.currentTime = 0
     audio.play()
   })
+
+  const keys = document.querySelectorAll('div[data-key]')
+  keys.forEach((key) => {
+    key.addEventListener('transitionend', (e) => {
+      if(e.propertyName !== 'transform') return
+      
+      e.target.classList.remove('playing')
+    })
+  })
 </script>
 
 
