@@ -23,9 +23,16 @@ describe('01 - JavaScript Drum Kit App', () => {
       cy.get('audio[data-key="65"]').invoke('prop', 'paused').should('eq', false)
     })
 
-    it.only('같은 키보드 입력시 이전에 오디오가 연주 중인 경우 다시 처음부터 play한다.', () => {
+    it('같은 키보드 입력시 이전에 오디오가 연주 중인 경우 다시 처음부터 play한다.', () => {
       cy.get('body').type('a')
       cy.get('body').type('a')
       cy.get('@consoleLog').should('be.calledWith', 0)
+    })
+
+    it.only('키보드 입력에 해당하는 div는 playing class 가 추가', () => {
+      cy.get('body').type('a')
+      cy.get('div[data-key="65"]').invoke('prop', 'classList').should((classList) => {
+        expect(classList.value).to.contain('playing')
+      })
     })
 })
