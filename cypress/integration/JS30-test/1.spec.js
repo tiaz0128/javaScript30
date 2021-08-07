@@ -29,10 +29,17 @@ describe('01 - JavaScript Drum Kit App', () => {
       cy.get('@consoleLog').should('be.calledWith', 0)
     })
 
-    it.only('키보드 입력에 해당하는 div는 playing class 가 추가', () => {
+    it('키보드 입력에 해당하는 div는 playing class 가 추가', () => {
       cy.get('body').type('a')
       cy.get('div[data-key="65"]').invoke('prop', 'classList').should((classList) => {
         expect(classList.value).to.contain('playing')
+      })
+    })
+
+    it.only('css transition 이 끝나면 playing class 제거', () => {
+      cy.get('body').type('a')
+      cy.get('div[data-key="65"]').invoke('prop', 'classList').should((classList) => {
+        expect(classList.value).not.contain('playing')
       })
     })
 })
