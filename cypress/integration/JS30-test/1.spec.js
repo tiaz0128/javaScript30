@@ -1,3 +1,4 @@
+const { isRegExp } = require("util")
 
 describe('01 - JavaScript Drum Kit App', () => {
     beforeEach(() => {
@@ -16,4 +17,10 @@ describe('01 - JavaScript Drum Kit App', () => {
       cy.get('body').type('a')
       cy.get('@consoleLog').should('be.calledWith', 65)
     })
+
+    it.only('키보드 a 입력시 해당하는 오디오 DOM 객체가 play 상태가 된다.', () => {
+      cy.get('body').type('a')
+      cy.get('audio[data-key="65"]').invoke('prop', 'paused').should('eq', false)
+    })
+
 })
