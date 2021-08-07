@@ -36,7 +36,7 @@ describe('01 - JavaScript Drum Kit App', () => {
       })
     })
 
-    it.only('css transition 이 끝나면 playing class 제거', () => {
+    it('css transition 이 끝나면 playing class 제거', () => {
       cy.get('body').type('a')
       cy.get('div[data-key="65"]').invoke('prop', 'classList').should((classList) => {
         expect(classList.value).not.contain('playing')
