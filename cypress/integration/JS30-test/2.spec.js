@@ -10,4 +10,14 @@ describe('01 - JavaScript Drum Kit App', () => {
     it('3개 hand 가 존재', () => {
       cy.get('.hand').should('have.length', 3)
     })
+    
+    it('3개 hand 가 12시 방향에 위치', () => {
+      cy.get('.hand.hour-hand').invoke('css', 'width').then(transform => { expect(transform).to.equal("rotate(90deg);")})
+      cy.get('.hand.min-hand').invoke('css', 'transform').then(transform => { expect(transform).to.equal("rotate(90deg);")})
+      cy.get('.hand.second-hand').invoke('css', 'transform').then(transform => { expect(transform).to.equal("rotate(90deg);")})
+
+      // transform: rotate(90deg);
+      // transform-origin: 100%;
+    })
+
 })
