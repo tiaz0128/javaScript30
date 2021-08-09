@@ -12,9 +12,9 @@ describe('01 - JavaScript Drum Kit App', () => {
     })
     
     it('3개 hand 가 12시 방향에 위치', () => {
-      cy.get('.hand.hour-hand').invoke('css', 'width').then(transform => { expect(transform).to.equal("rotate(90deg);")})
-      cy.get('.hand.min-hand').invoke('css', 'transform').then(transform => { expect(transform).to.equal("rotate(90deg);")})
-      cy.get('.hand.second-hand').invoke('css', 'transform').then(transform => { expect(transform).to.equal("rotate(90deg);")})
+      cy.get('.hand.hour-hand').invoke('css', 'transform').then(transform => { expect(transform).to.equal("matrix(6.12323e-17, 1, -1, 6.12323e-17, 0, 0)")})
+      cy.get('.hand.min-hand').invoke('css', 'transform').then(transform => { expect(transform).to.equal("matrix(6.12323e-17, 1, -1, 6.12323e-17, 0, 0)")})
+      cy.get('.hand.second-hand').invoke('css', 'transform').then(transform => { expect(transform).to.equal("matrix(6.12323e-17, 1, -1, 6.12323e-17, 0, 0)")})
 
       // transform: rotate(90deg);
       // transform-origin: 100%;
