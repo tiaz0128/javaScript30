@@ -1,3 +1,5 @@
+const { waitForDebugger } = require("inspector")
+
 describe('01 - JavaScript Drum Kit App', () => {
     beforeEach(() => {
       cy.visit('http://127.0.0.1:5500/02%20-%20JS%20and%20CSS%20Clock/index-START.html',  {
@@ -15,9 +17,13 @@ describe('01 - JavaScript Drum Kit App', () => {
       cy.get('.hand.hour-hand').invoke('css', 'transform').then(transform => { expect(transform).to.equal("matrix(6.12323e-17, 1, -1, 6.12323e-17, 0, 0)")})
       cy.get('.hand.min-hand').invoke('css', 'transform').then(transform => { expect(transform).to.equal("matrix(6.12323e-17, 1, -1, 6.12323e-17, 0, 0)")})
       cy.get('.hand.second-hand').invoke('css', 'transform').then(transform => { expect(transform).to.equal("matrix(6.12323e-17, 1, -1, 6.12323e-17, 0, 0)")})
-
-      // transform: rotate(90deg);
-      // transform-origin: 100%;
     })
 
+    it.only('초침이 1초에 6도씩 움직인다.', () => {
+      cy.get('.hand.second-hand').should('have.css', 'transform').then((deg) => {
+        const prevDeg = deg;
+        cy.wait(1000)
+        cy.get('.hand.second-hand').should('have.css', 'transform').and('not.equal', prevDeg)  
+      })
+    })
 })
