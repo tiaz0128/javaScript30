@@ -70,8 +70,16 @@
   </style>
 
   <script>
+    const secHand = document.querySelector('.second-hand')
 
+    setInterval(() => {
+      const now = new Date();
+      const sec = now.getSeconds()
+      const secDeg = ((sec / 60) * 360) + 90;
 
+      secHand.style.transform = `rotate(${secDeg}deg)`
+
+    }, 1000)
   </script>
 </body>
 </html>
