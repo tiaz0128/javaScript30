@@ -19,11 +19,19 @@ describe('01 - JavaScript Drum Kit App', () => {
       cy.get('.hand.second-hand').invoke('css', 'transform').then(transform => { expect(transform).to.equal("matrix(6.12323e-17, 1, -1, 6.12323e-17, 0, 0)")})
     })
 
-    it.only('초침이 1초에 6도씩 움직인다.', () => {
+    it('초침이 1초에 6도씩 움직인다.', () => {
       cy.get('.hand.second-hand').should('have.css', 'transform').then((deg) => {
         const prevDeg = deg;
         cy.wait(1000)
         cy.get('.hand.second-hand').should('have.css', 'transform').and('not.equal', prevDeg)  
+      })
+    })
+
+    it.only('분침이 1분마다 움직인다.', () => {
+      cy.get('.min-hand').should('have.css', 'transform').then((deg) => {
+        const prevDeg = deg;
+        cy.wait(60000)
+        cy.get('.min-hand').should('have.css', 'transform').and('not.equal', prevDeg)  
       })
     })
 })
