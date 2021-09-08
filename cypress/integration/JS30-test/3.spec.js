@@ -8,5 +8,12 @@ describe('01 - JavaScript Drum Kit App', () => {
     cy.get('input').should('have.length', 3)
   })
 
+  it('Spacing 값만큼 이미지의 padding 값을 가진다..', () => {
+    cy.get('#spacing').should('have.attr', 'value').then((spaceValue) => {
+      cy.get('img').invoke('css', 'padding').then((padding) => {
+        expect(padding).to.equal(`${spaceValue}px`)
+      })
+    })
+  })
 
 })
