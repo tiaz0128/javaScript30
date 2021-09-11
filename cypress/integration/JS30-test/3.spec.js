@@ -16,4 +16,11 @@ describe('01 - JavaScript Drum Kit App', () => {
     })
   })
 
+  it('Blur 값만큼 이미지의 filter 값을 가진다..', () => {
+    cy.get('#spacing').should('have.attr', 'value').then((spaceValue) => {
+      cy.get('img').invoke('css', 'filter').then((filter) => {
+        expect(filter).to.equal(`blur(${spaceValue}px)`)
+      })
+    })
+  })
 })
