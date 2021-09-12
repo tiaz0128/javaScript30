@@ -2,8 +2,8 @@ const SPACE_VALUE = 150
 const BLUR_VALUE  = 20
 const BASE_VALUE  = '#FFFFFF'
 
-function covertRGB(baseValue){
-  return baseValue.match(/[^#]{2}/g).map(hex => parseInt(hex, 16))
+function hex2rgb(baseValue){
+  return baseValue.match(/[A-Z0-9]{2}/gi)?.map(hex => parseInt(hex, 16))
 }
 
 describe('03 - CSS Variables', () => {
@@ -31,10 +31,10 @@ describe('03 - CSS Variables', () => {
     })
   })
 
-  it('Base Color 와 같은 background-color 값을 가진다.', () => {
+  it.only('Base Color 와 같은 background-color 값을 가진다.', () => {
     cy.get('#base').should('have.attr', 'value').then((baseValue) => {
       cy.get('img').invoke('css', 'background-color').then((backgroundColor) => {
-        const [R,G,B] = covertRGB(baseValue)
+        const [R,G,B] = hex2rgb(baseValue)
         expect(backgroundColor).to.equal(`rgb(${R}, ${G}, ${B})`)
       })
     })
@@ -52,7 +52,7 @@ describe('03 - CSS Variables', () => {
 
   it('Base-input 에 입력된 RGB 색상값으로 이미지의 background-color 값을 가진다.', () => {
     cy.get('#base').invoke('val', BASE_VALUE).trigger('change')
-    const [R,G,B] = covertRGB(BASE_VALUE)
+    const [R,G,B] = hex2rgb(BASE_VALUE)
     cy.get('img').invoke('css', 'background-color').should('eq', `rgb(${R}, ${G}, ${B})`)  
   })
 })
